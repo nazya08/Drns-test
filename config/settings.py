@@ -43,6 +43,8 @@ INSTALLED_APPS += [
 
 # apps
 INSTALLED_APPS += [
+    'crafts',
+    'drones',
     'orders',
 ]
 
