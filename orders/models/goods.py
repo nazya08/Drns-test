@@ -77,3 +77,19 @@ class GoodDeal(models.Model):
         "Type", max_length=30,
         choices=[(tag.name, tag.value) for tag in GoodDealType],
     )
+    created_at = models.DateTimeField(
+        verbose_name="Created at",
+        auto_now_add=True
+    )
+    updated_at = models.DateTimeField(
+        verbose_name="Updated at",
+        auto_now=True
+    )
+
+    class Meta:
+        verbose_name = 'Good Deal'
+        verbose_name_plural = 'Good Deals'
+        ordering = ('created_at', 'status')
+
+    def __str__(self):
+        return f"Good-Deal #{self.pk}"
