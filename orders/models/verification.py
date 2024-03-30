@@ -21,19 +21,19 @@ class Verification(models.Model):
     )
 
     status = models.IntegerField(
-        choices=STATUS_CHOICES, default=1, verbose_name="Статус верифікації"
+        choices=STATUS_CHOICES, default=1, verbose_name="Status of verification"
     )
     order = models.OneToOneField(
-        'orders.Order', on_delete=models.CASCADE, verbose_name="Замовлення"
+        'orders.Order', on_delete=models.CASCADE, verbose_name="Order"
     )
     verified_by = models.ForeignKey(
-        User, on_delete=models.RESTRICT, related_name="verification_orders", verbose_name="Користувач-верифікатор"
+        User, on_delete=models.RESTRICT, related_name="verification_orders", verbose_name="Verifier"
     )
 
     class Meta:
-        verbose_name = "Верифікація"
-        verbose_name_plural = "Верифікації"
+        verbose_name = "Verification"
+        verbose_name_plural = "Verifications"
         ordering = ('status',)
 
     def __str__(self):
-        return f"Верифікація замовлення #{self.order} - {self.verified_by}"
+        return f"Verification #{self.order} - {self.verified_by}"

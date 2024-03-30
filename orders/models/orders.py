@@ -14,20 +14,20 @@ class Order(models.Model):
         editable=False
     )
     consumer = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="orders", verbose_name="Замовник"
+        User, on_delete=models.CASCADE, related_name="orders", verbose_name="Consumer"
     )
     created_at = models.DateTimeField(
-        verbose_name="Створено",
+        verbose_name="Created at",
         auto_now_add=True
     )
     updated_at = models.DateTimeField(
-        verbose_name="Змінено",
+        verbose_name="Updated at",
         auto_now=True
     )
 
     class Meta:
-        verbose_name = 'Замовлення'
-        verbose_name_plural = verbose_name
+        verbose_name = 'Order'
+        verbose_name_plural = 'Orders'
         ordering = ('created_at',)
 
     def __str__(self):
