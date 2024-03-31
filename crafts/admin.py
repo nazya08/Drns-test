@@ -7,6 +7,7 @@ from crafts.models import stores, crafts
 @admin.register(stores.Store)
 class StoreAdmin(admin.ModelAdmin):
     list_display = ('name', 'show_drones')
+    list_filter = ('name',)
 
     def show_drones(self, obj):
         drone = obj.drone

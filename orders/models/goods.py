@@ -65,7 +65,7 @@ class GoodDeal(models.Model):
         Goods, on_delete=models.PROTECT, related_name="goods_deals", verbose_name="Goods"
     )
     status = models.CharField(
-        "Status of verification", max_length=20,
+        "Status", max_length=20,
         choices=[(tag.name, tag.value) for tag in GoodDealStatus], default=GoodDealStatus.WAIT.value
     )
     count = models.PositiveSmallIntegerField("Count")
