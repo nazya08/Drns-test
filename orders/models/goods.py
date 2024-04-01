@@ -44,6 +44,7 @@ class Goods(models.Model):
         verbose_name = 'Goods'
         verbose_name_plural = verbose_name
         ordering = ('created_at',)
+        unique_together = ['order', 'drone']
 
     def __str__(self):
         return f"Goods #{self.pk}"
