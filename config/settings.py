@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 INSTALLED_APPS += [
     'rest_framework',
     'django_filters',
+    'djmoney',
 ]
 
 # apps

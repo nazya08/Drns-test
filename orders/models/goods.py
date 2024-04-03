@@ -1,6 +1,7 @@
 import uuid
 from enum import Enum
 
+from djmoney.models.fields import MoneyField
 from django.db import models
 
 
@@ -8,11 +9,6 @@ class GoodDealStatus(Enum):
     WAIT = "В очікуванні"
     CONFIRMED = "Підтверджено"
     UNCONFIRMED = "Непідтверджено"
-
-
-class PaymentIntent(Enum):
-    BUY_READY_DRONE = "Оплата за готовий дрон"
-    ORDER_DRONE_ASSEMBLY = "Замовлення на збірку дрона"
 
 
 class GoodDealType(Enum):
@@ -70,9 +66,8 @@ class GoodDeal(models.Model):
         choices=[(tag.name, tag.value) for tag in GoodDealStatus], default=GoodDealStatus.WAIT.value
     )
     count = models.PositiveSmallIntegerField("Count")
-    payment = models.CharField(
-        "Payment", max_length=30,
-        choices=[(tag.name, tag.value) for tag in PaymentIntent],
+    price = MoneyField(
+        "Price", decimal_places=2, default_currency='UAH', max_digits=11, blank=True, null=True
     )
     type = models.CharField(
         "Type", max_length=30,

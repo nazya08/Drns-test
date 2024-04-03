@@ -22,4 +22,8 @@ class OrderListCreate(generics.ListCreateAPIView):
 class OrderRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = (IsAdminOrConsumer,)
+
+    def get_permissions(self):
+        if self.request.method in ['GET', 'DELETE']:
+            return [IsAdminOrConsumer()]
+        return [IsAdminUser()]

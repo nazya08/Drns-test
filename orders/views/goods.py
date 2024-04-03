@@ -1,27 +1,18 @@
 from rest_framework import generics, filters
 from rest_framework.permissions import IsAdminUser
+
 from orders.models.goods import Goods, GoodDeal
-from orders.permissions import IsAdminOrConsumer
+from orders.permissions import IsAdminAllOrConsumerGet
 from orders.serializers.goods import GoodsSerializer, GoodDealSerializer
 
 
-class BaseAPIView(generics.GenericAPIView):
-    """
-    Базовий клас для представлень, де потрібна перевірка дозволу.
-    """
-
-    def get_permissions(self):
-        if self.request.method == 'POST':
-            return [IsAdminUser()]
-        return [IsAdminOrConsumer()]
-
-
-class GoodsListCreate(BaseAPIView, generics.ListCreateAPIView):
+class GoodsListCreate(generics.ListCreateAPIView):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['created_at', 'count']
     search_fields = ['type', 'drone__name']
+    permission_classes = (IsAdminUser,)
 
 
 class GoodsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
@@ -30,16 +21,17 @@ class GoodsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminUser,)
 
 
-class GoodDealListCreate(BaseAPIView, generics.ListCreateAPIView):
+class GoodDealListCreate(generics.ListCreateAPIView):
     queryset = GoodDeal.objects.all()
     serializer_class = GoodDealSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['created_at', 'count']
     search_fields = ['goods__drone__name']
+    permission_classes = (IsAdminUser,)
 
 
 class GoodDealRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = GoodDeal.objects.all()
     serializer_class = GoodDealSerializer
-    permission_classes = (IsAdminUser,)
+    permission_classes = (IsAdminAllOrConsumerGet,)
 

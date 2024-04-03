@@ -48,8 +48,8 @@ class GoodsAdmin(admin.ModelAdmin):
 
 @admin.register(goods.GoodDeal)
 class GoodDealAdmin(admin.ModelAdmin):
-    list_display = ('id', 'store_link', 'craft_link', 'goods_link', 'status', 'count', 'payment', 'type')
-    list_filter = ('status', 'payment', 'type')
+    list_display = ('id', 'store_link', 'craft_link', 'goods_link', 'status', 'price', 'count', 'type')
+    list_filter = ('status', 'type')
     search_fields = ('store__name', 'craft__id', 'goods__id')
     readonly_fields = ('id', 'created_at', 'updated_at',)
 
