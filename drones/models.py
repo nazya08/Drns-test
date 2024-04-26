@@ -31,3 +31,21 @@ class Drone(models.Model):
 
     def __str__(self):
         return f'{self.name} ({self.pk})'
+
+
+class DronePart(models.Model):
+    name = models.CharField(max_length=255)
+    desc = models.TextField(max_length=255)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class DroneDronePart(models.Model):
+    drone = models.ForeignKey(Drone, on_delete=models.CASCADE)
+    drone_part = models.ForeignKey(DronePart, on_delete=models.CASCADE)
+    count = models.IntegerField()
+    price = models.IntegerField()
+
+    def __str__(self):
+        return f'Дрон: {self.drone} Деталь: {self.drone_part} кількість: {self.count}'

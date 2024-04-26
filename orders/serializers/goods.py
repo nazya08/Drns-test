@@ -16,8 +16,8 @@ class GoodsSerializer(serializers.ModelSerializer):
 
 
 class GoodDealSerializer(serializers.ModelSerializer):
-    status = serializers.CharField(source='get_status_display')
-    type = serializers.CharField(source='get_type_display')
+    # status = serializers.CharField(source='get_status_display')
+    # type = serializers.CharField(source='get_type_display')
 
     goods = GoodsDetailSerializer()
 

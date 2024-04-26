@@ -7,7 +7,7 @@ from orders.serializers.goods import GoodsSerializer, GoodDealSerializer
 
 
 class GoodsListCreate(generics.ListCreateAPIView):
-    queryset = Goods.objects.all()
+    queryset = Goods.objects.select_related('order', 'drone')
     serializer_class = GoodsSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['created_at', 'count']
@@ -22,7 +22,7 @@ class GoodsRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
 
 
 class GoodDealListCreate(generics.ListCreateAPIView):
-    queryset = GoodDeal.objects.all()
+    queryset = GoodDeal.objects.select_related('goods')
     serializer_class = GoodDealSerializer
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     ordering_fields = ['created_at', 'count']

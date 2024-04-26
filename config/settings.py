@@ -40,6 +40,8 @@ INSTALLED_APPS += [
     'rest_framework',
     'django_filters',
     'djmoney',
+    'debug_toolbar',
+
 ]
 
 # apps
@@ -47,6 +49,8 @@ INSTALLED_APPS += [
     'crafts',
     'drones',
     'orders',
+    'inventory',
+    'shipment',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -147,3 +152,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ]
 }
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
